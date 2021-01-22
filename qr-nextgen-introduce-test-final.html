@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SeABank Internet Banking QR</title>
+    <script src="https://cdn.seanet.vn/bower_components/jquery/dist/jquery.js"></script>
+    
+</head>
+<body>
+<script type="text/javascript">
+var isIOS = false;
+var iOS = ['iPad', 'iPhone', 'iPod'];
+for(var i=0;i<iOS.length;i++){
+	if(navigator.userAgent.indexOf(iOS[i]) >= 0){
+		isIOS = true;
+		break;
+	}
+}
+
+var custId = location.search.split('custId=')[1];
+var now = new Date().valueOf();
+var iframe = document.createElement("iframe");
+iframe.style.border = "none";
+iframe.style.width = "1px";
+iframe.style.height = "1px";
+var appLink = "seamobile://app?ref=" + custId;
+iframe.onload = function () {
+	document.location = appLink;
+};
+iframe.src = appLink; //iOS app schema url
+
+window.onload = function(){
+	document.body.appendChild(iframe);
+}
+if(isIOS){
+	setTimeout(function () {
+	   if (new Date().valueOf() - now > 2100) return;
+	   window.location = 'https://apps.apple.com/vn/app/seamobile/id846407152';
+	}, 2000);
+}else{
+	setTimeout(function () {
+	   if (new Date().valueOf() - now > 2100) return;
+	   window.location = 'https://play.google.com/store/apps/details?id=vn.com.seabank.mb1';
+	}, 2000);
+}
+</script>
+</body>
+</html>
+
